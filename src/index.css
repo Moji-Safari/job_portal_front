@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+/* Custom colors - our modern orange theme */
+@theme {
+  --color-primary: #f97316; /* Orange 500 */
+  --color-primary-dark: #ea580c; /* Orange 600 */
+  --color-primary-light: #ffedd5; /* Orange 100 */
+  --color-secondary: #fff7ed; /* Orange 50 */
+}
