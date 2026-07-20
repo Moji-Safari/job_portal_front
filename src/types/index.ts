@@ -1,9 +1,3 @@
-// src/types/index.ts
-
-// ==========================================
-// USER & AUTHENTICATION TYPES
-// ==========================================
-
 export interface User {
   id: number;
   email: string;
@@ -26,7 +20,6 @@ export interface RegisterPayload {
 
 // ==========================================
 // EMPLOYEE PROFILE TYPES (Job Seekers)
-// ==========================================
 
 export interface Skill {
   id: number;
@@ -70,7 +63,6 @@ export interface Employee {
 
 // ==========================================
 // EMPLOYER PROFILE TYPES (Companies)
-// ==========================================
 
 export interface EmployerProfile {
   id: string;
@@ -99,7 +91,6 @@ export interface Employer {
   rejected_applications?: number;
 }
 
-// ==========================================
 // JOB POSITION TYPES
 // ==========================================
 
@@ -127,7 +118,6 @@ export interface Position {
 
 // ==========================================
 // APPLICATION TYPES
-// ==========================================
 
 export interface Application {
   id: string;
@@ -146,7 +136,6 @@ export interface Application {
 
 // ==========================================
 // SAVED JOB TYPES
-// ==========================================
 
 export interface SavedJob {
   id: string;
@@ -161,7 +150,6 @@ export interface SavedJob {
 
 // ==========================================
 // DASHBOARD TYPES
-// ==========================================
 
 export interface EmployeeDashboard {
   id: string;
@@ -197,7 +185,6 @@ export interface EmployerDashboard {
 
 // ==========================================
 // FILTER TYPES
-// ==========================================
 
 export interface JobFilters {
   search?: string;

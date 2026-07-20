@@ -131,17 +131,17 @@ const JobDetailsPage: React.FC = () => {
                 <p className="font-medium">{job.location}</p>
               </div>
               <div>
-                <p className="text-gray-500 text-sm">📅 Posted</p>
+                <p className="text-gray-500 text-sm"> Posted</p>
                 <p className="font-medium">
                   {new Date(job.created_at).toLocaleDateString()}
                 </p>
               </div>
               <div>
-                <p className="text-gray-500 text-sm">👥 Openings</p>
+                <p className="text-gray-500 text-sm"> Openings</p>
                 <p className="font-medium">{job.remained} positions left</p>
               </div>
               <div>
-                <p className="text-gray-500 text-sm">⏰ Deadline</p>
+                <p className="text-gray-500 text-sm"> Deadline</p>
                 <p className="font-medium">
                   {job.deadline
                     ? new Date(job.deadline).toLocaleDateString()
@@ -207,10 +207,10 @@ const JobDetailsPage: React.FC = () => {
               </button>
             </div>
 
-            {/* Application Stats */}
+            
             {job.total_applications && (
               <p className="text-sm text-gray-500 mt-4">
-                📊 {job.total_applications} people have applied for this
+                 {job.total_applications} people have applied for this
                 position
               </p>
             )}

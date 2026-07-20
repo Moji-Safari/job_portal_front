@@ -12,7 +12,7 @@ import JobsPage from "./pages/JobsPage";
 import JobDetailsPage from "./pages/JobDetailsPage";
 import Register from "./pages/Register";
 
-// Protected Route component - only accessible when logged in
+
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
@@ -25,7 +25,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
   return <>{children}</>;
 };
 
-// Route guard for employee-only pages
+
 const EmployeeRoute: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
@@ -42,7 +42,7 @@ const EmployeeRoute: React.FC<{ children: React.ReactNode }> = ({
   return <>{children}</>;
 };
 
-// Temporary Home component
+
 const HomePage: React.FC = () => {
   const { isAuthenticated, user } = useAuth();
 
@@ -82,7 +82,7 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      {/* Features Section */}
+      
       <div className="max-w-7xl mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
           Why Choose JobPortal?
@@ -157,7 +157,7 @@ const HomePage: React.FC = () => {
   );
 };
 
-// Main App Component
+
 function App() {
   return (
     <Router>
@@ -165,14 +165,14 @@ function App() {
         <div className="min-h-screen bg-secondary">
           <Navbar />
           <Routes>
-            {/* Public Routes */}
+           
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/jobs" element={<JobsPage />} />
             <Route path="/jobs/:id" element={<JobDetailsPage />} />
 
-            {/* Protected Routes - require login */}
+            
             <Route
               path="/dashboard"
               element={
