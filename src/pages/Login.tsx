@@ -19,8 +19,6 @@ const Login: React.FC = () => {
     try {
       const success = await login(email, password);
       if (success) {
-        // Redirect based on role
-        // In a real app, you'd get role from API
         navigate("/");
       } else {
         setError(
@@ -37,13 +35,11 @@ const Login: React.FC = () => {
   return (
     <div className="min-h-screen bg-secondary flex items-center justify-center py-12 px-4">
       <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
-        {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-primary">Welcome Back!</h1>
           <p className="text-gray-600 mt-2">Sign in to your account</p>
         </div>
 
-        {/* Demo Credentials Info */}
         <div className="bg-primary-light rounded-lg p-4 mb-6">
           <p className="text-primary-dark text-sm font-medium">
             Demo Credentials:
@@ -55,14 +51,12 @@ const Login: React.FC = () => {
           </p>
         </div>
 
-        {/* Error Message */}
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-4">
             {error}
           </div>
         )}
 
-        {/* Login Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label className="block text-gray-700 font-medium mb-2">

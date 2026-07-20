@@ -3,18 +3,17 @@ import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { mockUsers } from "../data/mockdata";
 
-// Define the shape of our form data
 interface RegisterFormData {
   email: string;
   username: string;
   password: string;
   confirmPassword: string;
   role: "user" | "admin";
-  // Employee-specific fields (for job seekers)
+
   employeeName?: string;
   employeeEducation?: "1" | "2" | "3" | "4";
   employeeCategory?: "health" | "tech" | "eng" | "finance" | "entertnmt";
-  // Employer-specific fields (for companies)
+
   companyName?: string;
   companyField?: "health" | "tech" | "eng" | "finance" | "entertnmt";
 }
@@ -23,27 +22,24 @@ const Register: React.FC = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  // Form state
   const [formData, setFormData] = useState<RegisterFormData>({
     email: "",
     username: "",
     password: "",
     confirmPassword: "",
     role: "user",
-    // Employee defaults
+
     employeeEducation: "2",
     employeeCategory: "tech",
-    // Employer defaults
+
     companyField: "tech",
   });
 
-  // UI state
   const [step, setStep] = useState<"account" | "profile">("account");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
-  // Handle input changes
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
@@ -55,11 +51,9 @@ const Register: React.FC = () => {
     }
   };
 
-  // Validate the first step (account info)
   const validateAccountStep = (): boolean => {
     const newErrors: Record<string, string> = {};
 
-    // Email validation
     if (!formData.email) {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -72,7 +66,6 @@ const Register: React.FC = () => {
       newErrors.email = "This email is already registered";
     }
 
-    // Username validation
     if (!formData.username) {
       newErrors.username = "Username is required";
     } else if (formData.username.length < 3) {
@@ -85,14 +78,12 @@ const Register: React.FC = () => {
       newErrors.username = "This username is already taken";
     }
 
-    // Password validation
     if (!formData.password) {
       newErrors.password = "Password is required";
     } else if (formData.password.length < 6) {
       newErrors.password = "Password must be at least 6 characters";
     }
 
-    // Confirm password
     if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match";
     }
@@ -101,7 +92,6 @@ const Register: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Validate the second step (profile info)
   const validateProfileStep = (): boolean => {
     const newErrors: Record<string, string> = {};
 
@@ -119,7 +109,6 @@ const Register: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Handle next button click
   const handleNext = () => {
     if (validateAccountStep()) {
       setStep("profile");
@@ -127,13 +116,11 @@ const Register: React.FC = () => {
     }
   };
 
-  // Handle back button click
   const handleBack = () => {
     setStep("account");
     window.scrollTo(0, 0);
   };
 
-  // Handle final form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -143,16 +130,10 @@ const Register: React.FC = () => {
 
     setIsLoading(true);
 
-    // Simulate API call delay
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
-    // In a real app, you would send this data to your backend API
     console.log("Registration data:", formData);
 
-    // For demo purposes, we'll simulate successful registration
-    // and then automatically log the user in
-
-    // Create a new user (in real app, this comes from backend)
     const newUserId = mockUsers.length + 1;
     const newUser = {
       id: newUserId,
@@ -161,7 +142,6 @@ const Register: React.FC = () => {
       role: formData.role,
     };
 
-    // Store registration info (in real app, this would be saved to backend)
     localStorage.setItem(
       "pendingRegistration",
       JSON.stringify({
@@ -179,17 +159,12 @@ const Register: React.FC = () => {
 
     setRegistrationSuccess(true);
 
-    // Auto login after successful registration
-    // In a real app, you'd call your login API
-    // For demo, we'll manually set the user
     setTimeout(() => {
-      // This is just for demo - in real app, you'd use your login function
       localStorage.setItem("user", JSON.stringify(newUser));
       navigate("/");
     }, 1500);
   };
 
-  // If registration is successful, show success message
   if (registrationSuccess) {
     return (
       <div className="min-h-screen bg-secondary flex items-center justify-center py-12 px-4">
@@ -226,7 +201,6 @@ const Register: React.FC = () => {
   return (
     <div className="min-h-screen bg-secondary py-12 px-4">
       <div className="max-w-3xl mx-auto">
-        {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-primary">Create an Account</h1>
           <p className="text-gray-600 mt-2">
@@ -234,7 +208,6 @@ const Register: React.FC = () => {
           </p>
         </div>
 
-        {/* Progress Steps */}
         <div className="flex justify-center mb-8">
           <div className="flex items-center">
             <div
@@ -261,17 +234,14 @@ const Register: React.FC = () => {
           </div>
         </div>
 
-        {/* Form Card */}
         <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
           <form onSubmit={handleSubmit}>
-            {/* Step 1: Account Information */}
             {step === "account" && (
               <div className="space-y-5">
                 <h2 className="text-xl font-semibold text-gray-800 mb-4">
                   Account Information
                 </h2>
 
-                {/* Email */}
                 <div>
                   <label className="block text-gray-700 font-medium mb-2">
                     Email Address *
@@ -291,7 +261,6 @@ const Register: React.FC = () => {
                   )}
                 </div>
 
-                {/* Username */}
                 <div>
                   <label className="block text-gray-700 font-medium mb-2">
                     Username *
@@ -316,7 +285,6 @@ const Register: React.FC = () => {
                   </p>
                 </div>
 
-                {/* Role Selection */}
                 <div>
                   <label className="block text-gray-700 font-medium mb-2">
                     I want to *
@@ -387,7 +355,6 @@ const Register: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Password */}
                 <div>
                   <label className="block text-gray-700 font-medium mb-2">
                     Password *
@@ -412,7 +379,6 @@ const Register: React.FC = () => {
                   </p>
                 </div>
 
-                {/* Confirm Password */}
                 <div>
                   <label className="block text-gray-700 font-medium mb-2">
                     Confirm Password *
@@ -438,7 +404,6 @@ const Register: React.FC = () => {
               </div>
             )}
 
-            {/* Step 2: Profile Information */}
             {step === "profile" && (
               <div className="space-y-5">
                 <h2 className="text-xl font-semibold text-gray-800 mb-4">
@@ -448,9 +413,7 @@ const Register: React.FC = () => {
                 </h2>
 
                 {formData.role === "user" ? (
-                  // Employee/Job Seeker fields
                   <>
-                    {/* Full Name */}
                     <div>
                       <label className="block text-gray-700 font-medium mb-2">
                         Full Name *
@@ -474,7 +437,6 @@ const Register: React.FC = () => {
                       )}
                     </div>
 
-                    {/* Education Level */}
                     <div>
                       <label className="block text-gray-700 font-medium mb-2">
                         Highest Education
@@ -492,7 +454,6 @@ const Register: React.FC = () => {
                       </select>
                     </div>
 
-                    {/* Professional Category */}
                     <div>
                       <label className="block text-gray-700 font-medium mb-2">
                         Professional Field
@@ -512,9 +473,7 @@ const Register: React.FC = () => {
                     </div>
                   </>
                 ) : (
-                  // Employer/Company fields
                   <>
-                    {/* Company Name */}
                     <div>
                       <label className="block text-gray-700 font-medium mb-2">
                         Company Name *
@@ -538,7 +497,6 @@ const Register: React.FC = () => {
                       )}
                     </div>
 
-                    {/* Industry Field */}
                     <div>
                       <label className="block text-gray-700 font-medium mb-2">
                         Industry *
@@ -559,7 +517,6 @@ const Register: React.FC = () => {
                   </>
                 )}
 
-                {/* Info Box */}
                 <div className="bg-primary-light rounded-lg p-4 mt-4">
                   <p className="text-primary-dark text-sm">
                     <strong>💡 Note:</strong> You can complete your full profile
@@ -569,7 +526,6 @@ const Register: React.FC = () => {
               </div>
             )}
 
-            {/* Form Buttons */}
             <div className="flex gap-3 mt-8">
               {step === "profile" && (
                 <button
@@ -601,7 +557,6 @@ const Register: React.FC = () => {
             </div>
           </form>
 
-          {/* Login Link */}
           <p className="text-center text-gray-600 mt-6 pt-4 border-t">
             Already have an account?{" "}
             <Link to="/login" className="text-primary hover:underline">

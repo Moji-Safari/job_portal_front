@@ -14,10 +14,8 @@ const JobDetailsPage: React.FC = () => {
   const [showApplyModal, setShowApplyModal] = useState(false);
   const [applicationSent, setApplicationSent] = useState(false);
 
-  // Find the job from mock data
   const job = mockPositions.find((p) => p.id === id);
 
-  // Check if user has already applied
   const hasApplied =
     isAuthenticated &&
     user &&
@@ -25,7 +23,6 @@ const JobDetailsPage: React.FC = () => {
       (app) => app.employee === `emp-00${user.id}` && app.position === id,
     );
 
-  // Check if job is saved
   const isSaved =
     isAuthenticated &&
     user &&
@@ -63,11 +60,9 @@ const JobDetailsPage: React.FC = () => {
   };
 
   const handleConfirmApply = () => {
-    // In a real app, you'd make an API call here
     setApplicationSent(true);
     setShowApplyModal(false);
 
-    // Show success message for 3 seconds
     setTimeout(() => {
       setApplicationSent(false);
     }, 3000);
@@ -105,7 +100,6 @@ const JobDetailsPage: React.FC = () => {
           Back to all jobs
         </Link>
 
-        {/* Success Message */}
         {applicationSent && (
           <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-4">
             ✅ Application submitted successfully! The employer will review your
@@ -113,9 +107,7 @@ const JobDetailsPage: React.FC = () => {
           </div>
         )}
 
-        {/* Main Job Card */}
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-          {/* Header */}
           <div className="bg-primary px-6 py-4">
             <div className="flex justify-between items-start">
               <div>
@@ -132,9 +124,7 @@ const JobDetailsPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Content */}
           <div className="p-6">
-            {/* Quick Info Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 pb-6 border-b">
               <div>
                 <p className="text-gray-500 text-sm">📍 Location</p>
@@ -160,7 +150,6 @@ const JobDetailsPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Description */}
             <div className="mb-6">
               <h2 className="text-lg font-semibold text-gray-800 mb-3">
                 Job Description
@@ -170,7 +159,6 @@ const JobDetailsPage: React.FC = () => {
               </p>
             </div>
 
-            {/* Requirements */}
             <div className="mb-6">
               <h2 className="text-lg font-semibold text-gray-800 mb-3">
                 Requirements
@@ -182,14 +170,12 @@ const JobDetailsPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Category Badge */}
             <div className="mb-6">
               <span className="inline-block px-3 py-1 bg-primary-light text-primary-dark rounded-full text-sm">
                 {job.category_display}
               </span>
             </div>
 
-            {/* Action Buttons */}
             <div className="flex flex-wrap gap-4 pt-4 border-t">
               <button
                 onClick={handleApply}
@@ -232,7 +218,6 @@ const JobDetailsPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Apply Modal */}
       {showApplyModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl max-w-md w-full p-6">

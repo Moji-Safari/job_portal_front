@@ -15,7 +15,6 @@ const Navbar: React.FC = () => {
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <span className="text-2xl font-bold text-primary">JobPortal</span>
             <span className="text-gray-500 hidden sm:inline">
@@ -23,7 +22,6 @@ const Navbar: React.FC = () => {
             </span>
           </Link>
 
-          {/* Navigation Links - Desktop */}
           <div className="hidden md:flex items-center space-x-6">
             <Link
               to="/jobs"
@@ -35,7 +33,6 @@ const Navbar: React.FC = () => {
             {isAuthenticated ? (
               <>
                 {user?.role === "user" ? (
-                  // Employee links
                   <>
                     <Link
                       to="/dashboard"
@@ -57,7 +54,6 @@ const Navbar: React.FC = () => {
                     </Link>
                   </>
                 ) : (
-                  // Employer links
                   <>
                     <Link
                       to="/employer/dashboard"
@@ -104,7 +100,6 @@ const Navbar: React.FC = () => {
             )}
           </div>
 
-          {/* Mobile menu button - for small screens */}
           <div className="md:hidden">
             <button className="text-gray-500 hover:text-primary">
               <svg

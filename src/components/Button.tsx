@@ -1,12 +1,9 @@
-// This is a REUSABLE button component
-// Think of it like a stamp - you can stamp it anywhere with different colors/text
-
 interface ButtonProps {
-  children: React.ReactNode; // What text goes inside the button
-  variant?: "primary" | "secondary" | "danger"; // What color/style
-  onClick?: () => void; // What happens when clicked (optional)
-  disabled?: boolean; // Is the button grayed out?
-  className?: string; // Extra CSS classes if needed
+  children: React.ReactNode;
+  variant?: "primary" | "secondary" | "danger";
+  onClick?: () => void;
+  disabled?: boolean;
+  className?: string;
 }
 
 export const Button = ({
@@ -16,7 +13,6 @@ export const Button = ({
   disabled = false,
   className = "",
 }: ButtonProps) => {
-  // Choose different styles based on variant
   const baseStyles =
     "px-4 py-2 rounded-lg font-semibold transition duration-200";
 

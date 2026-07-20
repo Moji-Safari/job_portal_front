@@ -10,7 +10,6 @@ const JobsPage: React.FC = () => {
 
   const { isAuthenticated } = useAuth();
 
-  // Get unique categories and locations for filters
   const categories = useMemo(() => {
     const cats = new Set(mockPositions.map((p) => p.category_display));
     return ["all", ...Array.from(cats)];
@@ -21,23 +20,18 @@ const JobsPage: React.FC = () => {
     return ["all", ...Array.from(locs)];
   }, []);
 
-  // Filter jobs based on search and filters
   const filteredJobs = useMemo(() => {
     return mockPositions.filter((job) => {
-      // Only show active jobs
       if (!job.is_active) return false;
 
-      // Search filter
       const matchesSearch =
         job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
         job.description.toLowerCase().includes(searchTerm.toLowerCase());
 
-      // Category filter
       const matchesCategory =
         selectedCategory === "all" || job.category_display === selectedCategory;
 
-      // Location filter
       const matchesLocation =
         selectedLocation === "all" || job.location === selectedLocation;
 
@@ -58,7 +52,6 @@ const JobsPage: React.FC = () => {
           </p>
         </div>
 
-        {/* Search Bar */}
         <div className="mb-6">
           <div className="relative">
             <input
@@ -84,7 +77,6 @@ const JobsPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Filters */}
         <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
           <div className="flex flex-wrap gap-4">
             <div className="flex-1 min-w-[150px]">
@@ -122,7 +114,6 @@ const JobsPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Results Count */}
         <div className="mb-4">
           <p className="text-gray-600">
             Found{" "}
@@ -133,14 +124,12 @@ const JobsPage: React.FC = () => {
           </p>
         </div>
 
-        {/* Jobs Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredJobs.map((job) => (
             <JobCard key={job.id} job={job} isAuthenticated={isAuthenticated} />
           ))}
         </div>
 
-        {/* No Results */}
         {filteredJobs.length === 0 && (
           <div className="text-center py-12">
             <svg
@@ -169,7 +158,6 @@ const JobsPage: React.FC = () => {
   );
 };
 
-// Job Card Component - separate component for each job listing
 const JobCard: React.FC<{ job: Position; isAuthenticated: boolean }> = ({
   job,
   isAuthenticated,
@@ -194,7 +182,6 @@ const JobCard: React.FC<{ job: Position; isAuthenticated: boolean }> = ({
           )}
         </div>
 
-        {/* Location & Type */}
         <div className="flex items-center gap-3 mt-3 text-sm text-gray-500">
           <div className="flex items-center gap-1">
             <svg
@@ -236,12 +223,10 @@ const JobCard: React.FC<{ job: Position; isAuthenticated: boolean }> = ({
           </div>
         </div>
 
-        {/* Description Preview */}
         <p className="text-gray-600 text-sm mt-3 line-clamp-2">
           {job.description.substring(0, 100)}...
         </p>
 
-        {/* Skills/Tags */}
         <div className="flex flex-wrap gap-2 mt-3">
           <span className="px-2 py-1 bg-primary-light text-primary-dark text-xs rounded-full">
             {job.category_display}
@@ -253,7 +238,6 @@ const JobCard: React.FC<{ job: Position; isAuthenticated: boolean }> = ({
           )}
         </div>
 
-        {/* Action Button */}
         <Link
           to={`/jobs/${job.id}`}
           className="mt-4 block w-full text-center bg-primary text-white py-2 rounded-lg hover:bg-primary-dark transition-colors"
